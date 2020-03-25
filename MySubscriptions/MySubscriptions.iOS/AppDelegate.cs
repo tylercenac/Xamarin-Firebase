@@ -24,7 +24,7 @@ namespace MySubscriptions.iOS
         {
             global::Xamarin.Forms.Forms.Init();
 
-            //Firebase.Core.App.Configure();
+            Firebase.Core.App.Configure();
 
             LoadApplication(new App());
 
