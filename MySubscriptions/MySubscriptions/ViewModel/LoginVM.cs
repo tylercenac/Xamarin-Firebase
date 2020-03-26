@@ -93,12 +93,20 @@ namespace MySubscriptions.ViewModel
             if (ConfirmPassword != Password)
                 await App.Current.MainPage.DisplayAlert("Error", "Passwords do not match", "Ok");
             else
-                await Auth.RegisterUser(Name, Email, Password);
+            {
+                bool result = await Auth.RegisterUser(Name, Email, Password);
+                if (result)
+                    await App.Current.MainPage.Navigation.PopAsync();
+            }
+                
+
         }
 
         private async void Login(object parameter)
         {
-            await Auth.AuthenticateUser(Email, Password);
+            bool result = await Auth.AuthenticateUser(Email, Password);
+            if (result)
+                await App.Current.MainPage.Navigation.PopAsync();
         }
 
         private bool LoginCanExecute(object parameter)
