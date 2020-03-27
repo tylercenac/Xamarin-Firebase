@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySubscriptions.Android", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySubscriptions.iOS", "MySubscriptions\MySubscriptions.iOS\MySubscriptions.iOS.csproj", "{2C3FCCC3-D293-47E5-86A3-097231E656E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySubscriptions", "MySubscriptions\MySubscriptions\MySubscriptions.csproj", "{1E106420-6AF4-4E7E-A389-2271B5EDB112}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySubscriptions", "MySubscriptions\MySubscriptions\MySubscriptions.csproj", "{1E106420-6AF4-4E7E-A389-2271B5EDB112}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

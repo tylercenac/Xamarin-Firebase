@@ -56,7 +56,7 @@ namespace MySubscriptions.Droid.Dependencies
 
         public bool IsAuthenticated()
         {
-
+            
             return Firebase.Auth.FirebaseAuth.Instance.CurrentUser != null;
             
         }
