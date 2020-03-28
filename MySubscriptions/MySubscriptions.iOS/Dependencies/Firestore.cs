@@ -7,8 +7,9 @@ using Foundation;
 using MySubscriptions.Model;
 using MySubscriptions.ViewModel.Helpers;
 using UIKit;
+using Xamarin.Forms;
 
-
+[assembly: Dependency(typeof(MySubscriptions.iOS.Dependencies.Firestore))]
 namespace MySubscriptions.iOS.Dependencies
 {
     class Firestore : IFirestore
