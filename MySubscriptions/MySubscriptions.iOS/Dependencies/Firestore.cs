@@ -7,8 +7,9 @@ using Foundation;
 using MySubscriptions.Model;
 using MySubscriptions.ViewModel.Helpers;
 using UIKit;
+using Xamarin.Forms;
 
-
+[assembly: Dependency(typeof(MySubscriptions.iOS.Dependencies.Firestore))]
 namespace MySubscriptions.iOS.Dependencies
 {
     class Firestore : IFirestore
@@ -50,9 +51,39 @@ namespace MySubscriptions.iOS.Dependencies
             
         }
 
-        public Task<IList<Subscription>> ReadSubscription()
+        public async Task<IList<Subscription>> ReadSubscriptions()
         {
-            throw new NotImplementedException();
+
+            try
+            {
+                var collection = Firebase.CloudFirestore.Firestore.SharedInstance.GetCollection("subscriptions");
+                var query = collection.WhereEqualsTo("author", Firebase.Auth.Auth.DefaultInstance.CurrentUser.Uid);
+                var documents = await query.GetDocumentsAsync();
+
+                List<Subscription> subscriptions = new List<Subscription>();
+                foreach(var doc in documents.Documents)
+                {
+                    var subscriptionDictionary = doc.Data;
+                    var subscription = new Subscription
+                    {
+                        IsActive = (bool)(subscriptionDictionary.ValueForKey(new NSString("isActive")) as NSNumber),
+                        Name = subscriptionDictionary.ValueForKey(new NSString("name")) as NSString,
+                        UserId = subscriptionDictionary.ValueForKey(new NSString("author")) as NSString,
+                        SubscribedDate = FIRTimeToDateTime(subscriptionDictionary.ValueForKey(new NSString("subscribedData")) as Firebase.CloudFirestore.Timestamp)
+
+                    };
+
+                    subscriptions.Add(subscription);
+
+                }
+
+                return subscriptions;
+            }
+            catch(Exception ex)
+            {
+                return new List<Subscription>();
+            }
+            
         }
 
         public Task<bool> UpdateSubscription(Subscription subscription)
@@ -65,6 +96,15 @@ namespace MySubscriptions.iOS.Dependencies
             if (date.Kind == DateTimeKind.Unspecified)
                 date = DateTime.SpecifyKind(date, DateTimeKind.Local);
             return (NSDate)date;
+        }
+
+        private static DateTime FIRTimeToDateTime(Firebase.CloudFirestore.Timestamp date)
+        {
+
+            DateTime reference = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1, 0, 0, 0));
+            return reference.AddSeconds(date.Seconds);
+           
+
         }
 
     }

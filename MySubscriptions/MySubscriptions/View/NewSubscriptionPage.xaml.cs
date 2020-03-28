@@ -9,7 +9,6 @@ using Xamarin.Forms.Xaml;
 
 namespace MySubscriptions.View
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewSubscriptionPage : ContentPage
     {
         public NewSubscriptionPage()

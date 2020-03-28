@@ -1,43 +1,42 @@
-﻿using MySubscriptions.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
+using MySubscriptions.Model;
 
 namespace MySubscriptions.ViewModel.Helpers
 {
-
     public interface IFirestore
     {
         bool InsertSubscription(Subscription subscription);
         Task<bool> DeleteSubscription(Subscription subscription);
         Task<bool> UpdateSubscription(Subscription subscription);
-        Task<IList<Subscription>> ReadSubscription();
+        Task<IList<Subscription>> ReadSubscriptions();
     }
 
     public class DatabaseHelper
     {
+        private static IFirestore firestore = Xamarin.Forms.DependencyService.Get<IFirestore>();
 
-        private static IFirestore firestore;
-
-        public Task<bool> DeleteSubscription(Subscription subscription)
+        public static Task<bool> DeleteSubscription(Subscription subscription)
         {
             return firestore.DeleteSubscription(subscription);
         }
 
-        public bool InsertSubscription(Subscription subscription)
+        public static bool InsertSubscription(Subscription subscription)
         {
             return firestore.InsertSubscription(subscription);
         }
 
-        public Task<IList<Subscription>> ReadSubscriptions()
+        public static Task<IList<Subscription>> ReadSubscriptions()
         {
-            return firestore.ReadSubscription();
+            return firestore.ReadSubscriptions();
         }
 
-        public Task<bool> UpdateSubscription(Subscription subscription)
+        public static Task<bool> UpdateSubscription(Subscription subscription)
         {
             return firestore.UpdateSubscription(subscription);
         }
     }
+
+
 }
