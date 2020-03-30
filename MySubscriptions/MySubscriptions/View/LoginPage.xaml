@@ -22,6 +22,9 @@
                 <Button Text="Login"
                         Command="{Binding LoginCommand}"
                         CommandParameter="{Binding CanLogin}"/>
+                <Button Text="Login with Facebook"
+                        Command="{Binding FBLoginCommand}"
+                        CommandParameter="{Binding FBCanLogin}"/>
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Don't have an account?"/>
                     <Label Text="Register"

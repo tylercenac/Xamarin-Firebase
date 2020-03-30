@@ -70,7 +70,7 @@ namespace MySubscriptions.Droid.Dependencies
                 profileUpdates.SetDisplayName(name);
                 var build = profileUpdates.Build();
 
-                var user = Firebase.Auth.FirebaseAuth.Instance.CurrentUser;
+                var user = Xamarin.Firebase.Auth.FirebaseAuth.Instance.CurrentUser;
                 await user.UpdateProfileAsync(build);
 
                 return true;
@@ -93,5 +93,11 @@ namespace MySubscriptions.Droid.Dependencies
             }
 
         }
+
+        public async Task<bool> LoginWithFacebook(string accessToken)
+        {
+            //await 
+        }
+
     }
 }

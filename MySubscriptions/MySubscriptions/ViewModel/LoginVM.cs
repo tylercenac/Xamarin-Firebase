@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -68,10 +69,13 @@ namespace MySubscriptions.ViewModel
             get { return !string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password) && !string.IsNullOrEmpty(ConfirmPassword) && !string.IsNullOrEmpty(Name); }
         }
 
+        
+
         public ICommand LoginCommand { get; set; }
 
         public ICommand RegisterCommand { get; set; }
 
+        public ICommand FBLoginCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -80,6 +84,8 @@ namespace MySubscriptions.ViewModel
 
             LoginCommand = new Command(Login, LoginCanExecute);
             RegisterCommand = new Command(Register, RegisterCanExecute);
+
+            FBLoginCommand = new Command(FBLogin);
 
         }
 
@@ -108,6 +114,18 @@ namespace MySubscriptions.ViewModel
             if (result)
                 await App.Current.MainPage.Navigation.PopAsync();
         }
+
+        private async void FBLogin(object parameter)
+        {
+            Debug.Write("FBLoginSuccessfull");
+
+            //get accessToken Heere
+
+            bool result = await Auth.LoginWithFacebook(accessToken);
+            if (result)
+                await App.Current.MainPage.Navigation.PopAsync();
+        }
+
 
         private bool LoginCanExecute(object parameter)
         {

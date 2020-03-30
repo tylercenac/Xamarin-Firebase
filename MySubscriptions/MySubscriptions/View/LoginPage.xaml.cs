@@ -15,6 +15,7 @@ namespace MySubscriptions.View
         public LoginPage()
         {
             InitializeComponent();
+
         }
 
         void RegisterLabel_Tapped(object sender, System.EventArgs args)
